@@ -72,9 +72,14 @@ static char kAFImageRequestOperationObjectKey;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _af_imageCache = [[AFImageCache alloc] init];
+        [_af_imageCache setCountLimit:100];
     });
-
+    
     return _af_imageCache;
+}
+
++ (void)clearSharedImageCache {
+    [self.af_sharedImageCache removeAllObjects];
 }
 
 #pragma mark -
